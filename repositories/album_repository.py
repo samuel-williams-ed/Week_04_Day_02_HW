@@ -38,3 +38,18 @@ def select_album(album_id):
         album = Album(result['title'], result['genre'], artist, result['id'])
     return album
 
+def select_all_albums():
+    sql = " SELECT * FROM albums"
+    return run_sql(sql)
+
+def select_albums_by_artist(artist_name_string):
+# find the artist id in album table
+    artist_id = rep_rep.find_artist_id_by_name(artist_name_string)
+# find albums matching found artist_id
+    sql = " SELECT * FROM albums WHERE artist_id=%s"
+    values = [artist_id]
+    return run_sql(sql, values)
+
+# debug:
+    # print(f"alb_rep: select_alb_by_art: sqp values passed: {values}")
+    # print(f"alb_rep: select_alb_by_art: sqp query returned: {query_result}")

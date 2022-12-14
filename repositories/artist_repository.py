@@ -26,7 +26,6 @@ def select_all():
     
     return artists_list
 
-
 def select_single(artist_id):
     artist = None
     sql = "SELECT * FROM artists WHERE id=%s"
@@ -40,3 +39,11 @@ def select_single(artist_id):
     # None if 'if' block doesn't run
     return artist
 
+def find_artist_id_by_name(artist_name_sting):
+    sql = sql = "SELECT * FROM artists WHERE name=%s"
+    values = [artist_name_sting]
+    query_result = run_sql(sql, values)
+    if len(query_result) > 0:
+        query_result = query_result[0]
+        print("artist_repo: find_artist_by_id() has found multiple artists by that name! Returning the first only")
+    return query_result['id']
